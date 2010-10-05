@@ -9,6 +9,10 @@ public class ConjunctionFormula implements Formula {
 
 	private Collection<ModalFormula> formulas;
 	
+	public ConjunctionFormula(ModalFormula modalFormula) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean hasAction(Label action) {
 		Iterator<ModalFormula> it = formulas.iterator();
@@ -21,11 +25,11 @@ public class ConjunctionFormula implements Formula {
 	}
 
 	@Override
-	public boolean models(Formula f) {
+	public boolean canDo(Formula f) {
 		if (f instanceof ModalFormula) {
 			Iterator<ModalFormula> it = formulas.iterator();
 			while (it.hasNext()) {
-				if ((it.next()).models(f)) {
+				if ((it.next()).canDo(f)) {
 					return true;
 				}
 			}
@@ -39,7 +43,7 @@ public class ConjunctionFormula implements Formula {
 				fTemp = it1.next();
 				it2 = ((ConjunctionFormula) f).getIterator();
 				while (it2.hasNext()) {
-					if (fTemp.models(it2.next())) {
+					if (fTemp.canDo(it2.next())) {
 						ok = true;
 					}
 				}
@@ -54,6 +58,11 @@ public class ConjunctionFormula implements Formula {
 
 	private Iterator<ModalFormula> getIterator() {
 		return formulas.iterator();
+	}
+
+	public boolean areAllLowerThan(Label action, float probability, Formula formula) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

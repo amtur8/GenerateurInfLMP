@@ -6,6 +6,10 @@ public class DisjunctionFormula implements Formula {
 	
 	private Collection<ConjunctionFormula> formulas;
 
+	public DisjunctionFormula(ConjunctionFormula newCFormula) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean hasAction(Label action) {
 		// TODO Auto-generated method stub
@@ -13,7 +17,7 @@ public class DisjunctionFormula implements Formula {
 	}
 
 	@Override
-	public boolean models(Formula f) {
+	public boolean canDo(Formula f) {
 		// TODO Auto-generated method stub
 		return false;
 	}
