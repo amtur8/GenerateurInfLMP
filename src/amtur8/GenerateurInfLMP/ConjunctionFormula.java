@@ -26,34 +26,38 @@ public class ConjunctionFormula implements Formula {
 
 	@Override
 	public boolean canDo(Formula f) {
-		if (f instanceof ModalFormula) {
-			Iterator<ModalFormula> it = formulas.iterator();
-			while (it.hasNext()) {
-				if ((it.next()).canDo(f)) {
-					return true;
-				}
-			}
-		}
-		else {
-			Iterator<ModalFormula> it1 = formulas.iterator();
-			ModalFormula fTemp;
-			Iterator<ModalFormula> it2;
-			boolean ok = false;
-			while (it1.hasNext()) {
-				fTemp = it1.next();
-				it2 = ((ConjunctionFormula) f).getIterator();
-				while (it2.hasNext()) {
-					if (fTemp.canDo(it2.next())) {
-						ok = true;
-					}
-				}
-				if (!ok) {
-					return false;
-				}
-				ok = false;
-			}
-		}
 		return false;
+	}
+	
+	public boolean canDo(ModalFormula f) {
+		ConjunctionFormula newFormula = new ConjunctionFormula(f);
+		return this.canDo(newFormula);
+	}
+	
+	public boolean canDo(ConjunctionFormula f) {
+		Iterator<ModalFormula> it1;
+		ModalFormula fTemp;
+		Iterator<ModalFormula> it2 = f.getIterator();
+		boolean ok = false;
+		while (it2.hasNext()) {
+			fTemp = it2.next();
+			it1 = this.getIterator();
+			while (it1.hasNext() && !ok) {
+				if (it1.next().canDo(fTemp)) {
+					ok = true;
+				}
+			}
+			if (!ok) {
+				return false;
+			}
+			ok = false;
+		}
+		return true;
+	}
+	
+	public boolean canDo(DisjunctionFormula f) {
+		DisjunctionFormula newFormula = new DisjunctionFormula(this);
+		return newFormula.canDo(f);
 	}
 
 	private Iterator<ModalFormula> getIterator() {
