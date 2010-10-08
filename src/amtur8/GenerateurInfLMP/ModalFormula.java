@@ -12,10 +12,10 @@ public class ModalFormula implements Formula {
 	}
 	
 	public boolean canDo(ModalFormula f) {
-		if (f.getAction() != this.action) {
+		if (!(f.getAction().equals(this.action))) {
 			return false;
 		}
-		if (f.getProbability() < this.probability) {
+		if (f.getProbability() > this.probability) {
 			return false;
 		}
 		return f.getFormula().canDo(this.formula);

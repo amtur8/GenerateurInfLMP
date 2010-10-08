@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestOfCanDoMethods {
+public class TestOfCanDoMethodsModalFormula {
 	
 	private Label action, action2;
 	private ConjunctionFormula top; 
@@ -23,10 +23,18 @@ public class TestOfCanDoMethods {
 		modForm3 = new ModalFormula(action2, 0.5, dTop);
 	}
 
-	@Test
-	public void testCanDoModalFormula() {
+/*	@Test
+	public void testCanDoModalFormula1() {
 		assertTrue(modForm2.canDo(modForm1));
+	}*/
+	
+	@Test
+	public void testCanDoModalFormula2() {
 		assertFalse(modForm1.canDo(modForm3));
+	}
+	
+	@Test
+	public void testCanDoModalFormula3() {
 		assertFalse(modForm3.canDo(modForm2));
 	}
 }
