@@ -1,5 +1,6 @@
 package amtur8.GenerateurInfLMP;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -10,7 +11,8 @@ public class ConjunctionFormula implements Formula {
 	private Collection<ModalFormula> formulas;
 	
 	public ConjunctionFormula(ModalFormula modalFormula) {
-		// TODO Auto-generated constructor stub
+		formulas = new ArrayList<ModalFormula>();
+		formulas.add(modalFormula);
 	}
 
 	@Override

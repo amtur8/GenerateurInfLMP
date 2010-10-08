@@ -42,5 +42,13 @@ public class ModalFormula implements Formula {
 
 	private float getProbability() {
 		return probability;
+	}
+
+	public ModalFormula(Label action, float probability,
+			DisjunctionFormula formula) {
+		super();
+		this.action = action;
+		this.probability = probability;
+		this.formula = formula;
 	}	
 }
