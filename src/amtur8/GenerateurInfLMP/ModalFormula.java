@@ -42,12 +42,5 @@ public class ModalFormula implements Formula {
 
 	private float getProbability() {
 		return probability;
-	}
-
-	@Override
-	public boolean hasAction(Label action) {
-		return action == this.action;
-	}
-	
-	
+	}	
 }

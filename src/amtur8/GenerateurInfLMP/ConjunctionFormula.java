@@ -14,17 +14,6 @@ public class ConjunctionFormula implements Formula {
 	}
 
 	@Override
-	public boolean hasAction(Label action) {
-		Iterator<ModalFormula> it = formulas.iterator();
-		while (it.hasNext()) {
-			if ((it.next()).hasAction(action)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public boolean canDo(Formula f) {
 		return false;
 	}

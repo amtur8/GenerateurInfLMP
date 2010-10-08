@@ -1,5 +1,6 @@
 package amtur8.GenerateurInfLMP;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -8,13 +9,8 @@ public class DisjunctionFormula implements Formula {
 	private Collection<ConjunctionFormula> formulas;
 
 	public DisjunctionFormula(ConjunctionFormula newCFormula) {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean hasAction(Label action) {
-		// TODO Auto-generated method stub
-		return false;
+		formulas = new ArrayList<ConjunctionFormula>();
+		formulas.add(newCFormula);
 	}
 
 	@Override
