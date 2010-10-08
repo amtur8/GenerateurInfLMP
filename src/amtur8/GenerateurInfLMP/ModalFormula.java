@@ -3,7 +3,7 @@ package amtur8.GenerateurInfLMP;
 public class ModalFormula implements Formula {
 
 	private Label action;
-	private float probability;
+	private double probability;
 	private DisjunctionFormula formula;
 	
 	@Override
@@ -40,15 +40,15 @@ public class ModalFormula implements Formula {
 		return formula;
 	}
 
-	private float getProbability() {
+	private double getProbability() {
 		return probability;
 	}
 
-	public ModalFormula(Label action, float probability,
+	public ModalFormula(Label action, double d,
 			DisjunctionFormula formula) {
 		super();
 		this.action = action;
-		this.probability = probability;
+		this.probability = d;
 		this.formula = formula;
 	}	
 }

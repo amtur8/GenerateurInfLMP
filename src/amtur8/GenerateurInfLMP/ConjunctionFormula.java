@@ -15,6 +15,10 @@ public class ConjunctionFormula implements Formula {
 		formulas.add(modalFormula);
 	}
 
+	public ConjunctionFormula() {
+		formulas = new ArrayList<ModalFormula>();
+	}
+
 	@Override
 	public boolean canDo(Formula f) {
 		return false;
@@ -54,10 +58,4 @@ public class ConjunctionFormula implements Formula {
 	private Iterator<ModalFormula> getIterator() {
 		return formulas.iterator();
 	}
-
-	public boolean areAllLowerThan(Label action, float probability, Formula formula) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

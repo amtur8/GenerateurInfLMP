@@ -12,6 +12,10 @@ public class DisjunctionFormula implements Formula {
 		formulas = new ArrayList<ConjunctionFormula>();
 		formulas.add(newCFormula);
 	}
+	
+	public DisjunctionFormula() {
+		formulas = new ArrayList<ConjunctionFormula>();
+	}
 
 	@Override
 	public boolean canDo(Formula f) {
