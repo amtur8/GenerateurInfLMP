@@ -36,7 +36,7 @@ public class ModalFormula implements Formula {
 		return this.action;
 	}
 
-	private Formula getFormula() {
+	private DisjunctionFormula getFormula() {
 		return formula;
 	}
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestOfEqualsMethod {
+public class TestOfEqualsMethodLabel {
 
 	private Label label1, label2, label3;
 	private Object obj;

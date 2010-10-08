@@ -23,18 +23,18 @@ public class TestOfCanDoMethodsModalFormula {
 		modForm3 = new ModalFormula(action2, 0.5, dTop);
 	}
 
-/*	@Test
-	public void testCanDoModalFormula1() {
+	@Test
+	public void testCanDoModalFormulaSameActionProbabilityGreaterThenTop() {
 		assertTrue(modForm2.canDo(modForm1));
-	}*/
+	}
 	
 	@Test
-	public void testCanDoModalFormula2() {
+	public void testCanNotDoModalFormulaDifferentAction() {
 		assertFalse(modForm1.canDo(modForm3));
 	}
 	
 	@Test
-	public void testCanDoModalFormula3() {
+	public void testCanNotDoModalFormulaDifferentAction2() {
 		assertFalse(modForm3.canDo(modForm2));
 	}
 }

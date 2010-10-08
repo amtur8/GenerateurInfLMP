@@ -17,12 +17,6 @@ public class DisjunctionFormula implements Formula {
 		formulas = new ArrayList<ConjunctionFormula>();
 	}
 
-	@Override
-	public boolean canDo(Formula f) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 	public boolean canDo(ModalFormula f) {
 		ConjunctionFormula newCFormula = new ConjunctionFormula(f);
 		DisjunctionFormula newDFormula = new DisjunctionFormula(newCFormula);
@@ -53,6 +47,12 @@ public class DisjunctionFormula implements Formula {
 			ok = false;
 		}
 		return true;
+	}
+	
+	@Override
+	public boolean canDo(Formula f) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	private Iterator<ConjunctionFormula> getIterator() {
