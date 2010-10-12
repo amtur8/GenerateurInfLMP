@@ -40,10 +40,6 @@ public class ModalFormula implements Formula {
 		return newDFormula.canDo(f);
 	}
 
-	private Label getAction() {
-		return this.action;
-	}
-
 	private DisjunctionFormula getFormula() {
 		return formula;
 	}
