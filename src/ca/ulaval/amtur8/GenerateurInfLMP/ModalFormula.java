@@ -11,24 +11,21 @@ public class ModalFormula implements Formula {
 		return false;
 	}
 	
-	public boolean hasAction(Label action) {
-		return this.action.equals(action);
-	}
-	
-	public int compareProbability(int probability) {
-		return 0;
-	}
-	
 	public boolean canDo(ModalFormula formule) {
-		if (!formule.hasAction(this.action)) {
-			return false;
-		}
-		if (formule.getProbability() > this.probability) {
-			return false;
-		}
-		return formule.getFormula().canDo(this.formula);
+		return formule.isDoneBy(this.action, this.probability, this.formula);
 	}
 	
+	private boolean isDoneBy(Label action2, double probability2,
+			DisjunctionFormula formula2) {
+		if (!this.action.equals(action2)) {
+			return false;
+		}
+		if (this.probability > probability2) {
+			return false;
+		}
+		return formula2.canDo(this.formula);
+	}
+
 	public boolean canDo(ConjunctionFormula f) {
 		ConjunctionFormula newFormula = new ConjunctionFormula(this);
 		return newFormula.canDo(f);
@@ -38,14 +35,6 @@ public class ModalFormula implements Formula {
 		ConjunctionFormula newCFormula = new ConjunctionFormula(this);
 		DisjunctionFormula newDFormula = new DisjunctionFormula(newCFormula);
 		return newDFormula.canDo(f);
-	}
-
-	private DisjunctionFormula getFormula() {
-		return formula;
-	}
-
-	private double getProbability() {
-		return probability;
 	}
 
 	public ModalFormula(Label action, double d,

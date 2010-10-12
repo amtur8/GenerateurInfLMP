@@ -47,9 +47,8 @@ public class ConjunctionFormula implements Formula {
 		return true;
 	}
 	
-	public boolean canDo(DisjunctionFormula f) {
-		DisjunctionFormula newFormula = new DisjunctionFormula(this);
-		return newFormula.canDo(f);
+	public boolean canDo(DisjunctionFormula formula) {
+		return formula.isDoneBy(this);
 	}
 
 	private Iterator<ModalFormula> getIterator() {

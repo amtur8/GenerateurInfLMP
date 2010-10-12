@@ -29,22 +29,11 @@ public class DisjunctionFormula implements Formula {
 	}
 
 	public boolean canDo(DisjunctionFormula f) {
-		Iterator<ConjunctionFormula> it1 = formulas.iterator();
-		Iterator<ConjunctionFormula> it2;
-		ConjunctionFormula fTemp;
-		boolean ok = false;
-		while (it1.hasNext()) {
-			fTemp = it1.next();
-			it2 = f.getIterator();
-			while (it2.hasNext() && !ok) {
-				if (fTemp.canDo(it2.next())){
-					ok = true;
-				}
-			}
-			if (!ok) {
+		Iterator<ConjunctionFormula> iteratorOverPredicate = this.getIterator();
+		while (iteratorOverPredicate.hasNext()) {
+			if (!iteratorOverPredicate.next().canDo(f)) {
 				return false;
 			}
-			ok = false;
 		}
 		return true;
 	}
@@ -57,5 +46,15 @@ public class DisjunctionFormula implements Formula {
 
 	private Iterator<ConjunctionFormula> getIterator() {
 		return this.formulas.iterator();
+	}
+
+	public boolean isDoneBy(ConjunctionFormula conjunctionFormula) {
+		Iterator<ConjunctionFormula> iteratorOverConclusion = this.getIterator();
+		while (iteratorOverConclusion.hasNext()) {
+			if (conjunctionFormula.canDo(iteratorOverConclusion.next())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
