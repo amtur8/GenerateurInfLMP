@@ -18,11 +18,6 @@ public class ConjunctionFormula implements Formula {
 	public ConjunctionFormula() {
 		formulas = new ArrayList<ModalFormula>();
 	}
-
-	@Override
-	public boolean canDo(Formula f) {
-		return false;
-	}
 	
 	public boolean canDo(ModalFormula formula) {
 		Iterator<ModalFormula> iteratorOverPredicate;
@@ -36,11 +31,9 @@ public class ConjunctionFormula implements Formula {
 	}
 	
 	public boolean canDo(ConjunctionFormula f) {
-		ModalFormula temporaryFormula;
 		Iterator<ModalFormula> iteratorOverConclusion = f.getIterator();
 		while (iteratorOverConclusion.hasNext()) {
-			temporaryFormula = iteratorOverConclusion.next();
-			if (!this.canDo(temporaryFormula)) {
+			if (!this.canDo(iteratorOverConclusion.next())) {
 				return false;
 			}
 		}
@@ -53,5 +46,15 @@ public class ConjunctionFormula implements Formula {
 
 	private Iterator<ModalFormula> getIterator() {
 		return formulas.iterator();
+	}
+
+	public boolean isDoneBy(ModalFormula modalFormula) {
+		Iterator<ModalFormula> iteratorOverConclusion = this.getIterator();
+		while  (iteratorOverConclusion.hasNext()) {
+			if (!modalFormula.canDo(iteratorOverConclusion.next())) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

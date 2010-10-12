@@ -18,14 +18,23 @@ public class DisjunctionFormula implements Formula {
 	}
 
 	public boolean canDo(ModalFormula f) {
-		ConjunctionFormula newCFormula = new ConjunctionFormula(f);
-		DisjunctionFormula newDFormula = new DisjunctionFormula(newCFormula);
-		return this.canDo(newDFormula);
+		Iterator<ConjunctionFormula> iteratorOverPredicate = this.getIterator();
+		while (iteratorOverPredicate.hasNext()) {
+			if (!iteratorOverPredicate.next().canDo(f)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public boolean canDo(ConjunctionFormula f) {
-		DisjunctionFormula newFormula = new DisjunctionFormula(f);
-		return this.canDo(newFormula);
+		Iterator<ConjunctionFormula> iteratorOverPredicate = this.getIterator();
+		while (iteratorOverPredicate.hasNext()) {
+			if (!iteratorOverPredicate.next().canDo(f)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean canDo(DisjunctionFormula f) {
@@ -37,12 +46,6 @@ public class DisjunctionFormula implements Formula {
 		}
 		return true;
 	}
-	
-	@Override
-	public boolean canDo(Formula f) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	private Iterator<ConjunctionFormula> getIterator() {
 		return this.formulas.iterator();
@@ -52,6 +55,16 @@ public class DisjunctionFormula implements Formula {
 		Iterator<ConjunctionFormula> iteratorOverConclusion = this.getIterator();
 		while (iteratorOverConclusion.hasNext()) {
 			if (conjunctionFormula.canDo(iteratorOverConclusion.next())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isDoneBy(ModalFormula modalFormula) {
+		Iterator<ConjunctionFormula> iteratorOverConclusion = this.getIterator();
+		while (iteratorOverConclusion.hasNext()) {
+			if (modalFormula.canDo(iteratorOverConclusion.next())) {
 				return true;
 			}
 		}

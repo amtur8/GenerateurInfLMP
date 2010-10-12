@@ -2,5 +2,9 @@ package ca.ulaval.amtur8.GenerateurInfLMP;
 
 public interface Formula {
 
-	public boolean canDo(Formula f);
+	boolean canDo(ModalFormula formule);
+
+	boolean canDo(ConjunctionFormula f);
+
+	boolean canDo(DisjunctionFormula f);
 }

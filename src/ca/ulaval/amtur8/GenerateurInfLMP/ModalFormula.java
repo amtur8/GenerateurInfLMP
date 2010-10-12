@@ -6,11 +6,15 @@ public class ModalFormula implements Formula {
 	private double probability;
 	private DisjunctionFormula formula;
 	
-	@Override
-	public boolean canDo(Formula f) {
-		return false;
+	public ModalFormula(Label action, double d,
+			DisjunctionFormula formula) {
+		super();
+		this.action = action;
+		this.probability = d;
+		this.formula = formula;
 	}
-	
+
+	@Override
 	public boolean canDo(ModalFormula formule) {
 		return formule.isDoneBy(this.action, this.probability, this.formula);
 	}
@@ -26,22 +30,13 @@ public class ModalFormula implements Formula {
 		return formula2.canDo(this.formula);
 	}
 
+	@Override
 	public boolean canDo(ConjunctionFormula f) {
-		ConjunctionFormula newFormula = new ConjunctionFormula(this);
-		return newFormula.canDo(f);
+		return f.isDoneBy(this);
 	}
 	
+	@Override
 	public boolean canDo(DisjunctionFormula f) {
-		ConjunctionFormula newCFormula = new ConjunctionFormula(this);
-		DisjunctionFormula newDFormula = new DisjunctionFormula(newCFormula);
-		return newDFormula.canDo(f);
-	}
-
-	public ModalFormula(Label action, double d,
-			DisjunctionFormula formula) {
-		super();
-		this.action = action;
-		this.probability = d;
-		this.formula = formula;
+		return f.isDoneBy(this);
 	}	
 }
