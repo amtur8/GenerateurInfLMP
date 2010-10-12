@@ -24,28 +24,25 @@ public class ConjunctionFormula implements Formula {
 		return false;
 	}
 	
-	public boolean canDo(ModalFormula f) {
-		ConjunctionFormula newFormula = new ConjunctionFormula(f);
-		return this.canDo(newFormula);
+	public boolean canDo(ModalFormula formula) {
+		Iterator<ModalFormula> iteratorOverPredicate;
+		iteratorOverPredicate = this.getIterator();
+		while (iteratorOverPredicate.hasNext()) {
+			if (iteratorOverPredicate.next().canDo(formula)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean canDo(ConjunctionFormula f) {
-		Iterator<ModalFormula> it1;
-		ModalFormula fTemp;
-		Iterator<ModalFormula> it2 = f.getIterator();
-		boolean ok = false;
-		while (it2.hasNext()) {
-			fTemp = it2.next();
-			it1 = this.getIterator();
-			while (it1.hasNext() && !ok) {
-				if (it1.next().canDo(fTemp)) {
-					ok = true;
-				}
-			}
-			if (!ok) {
+		ModalFormula temporaryFormula;
+		Iterator<ModalFormula> iteratorOverConclusion = f.getIterator();
+		while (iteratorOverConclusion.hasNext()) {
+			temporaryFormula = iteratorOverConclusion.next();
+			if (!this.canDo(temporaryFormula)) {
 				return false;
 			}
-			ok = false;
 		}
 		return true;
 	}
