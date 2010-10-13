@@ -6,6 +6,8 @@ import java.util.Collection;
 public class ConjunctionFormula implements Formula {
 
 	private Collection<ModalFormula> formulas;
+	//private static final Collection<ModalFormula> EmptyFormulas = new ArrayList<ModalFormula>();
+	public static final ConjunctionFormula TOP = new ConjunctionFormula(); 
 	
 	public ConjunctionFormula(ModalFormula modalFormula) {
 		formulas = new ArrayList<ModalFormula>();

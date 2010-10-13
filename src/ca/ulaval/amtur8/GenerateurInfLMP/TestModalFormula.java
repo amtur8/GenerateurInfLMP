@@ -2,18 +2,9 @@ package ca.ulaval.amtur8.GenerateurInfLMP;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestModalFormula {
-
-	private ConjunctionFormula top;
-	private DisjunctionFormula dTop;
-	@Before
-	public void setUp() throws Exception {
-		top = new ConjunctionFormula();
-		dTop = new DisjunctionFormula(top);
-	}
 
 	@Test
 	public void testCanDoModalFormulaSameActionProbabilityGreaterThenTop() {
@@ -34,15 +25,15 @@ public class TestModalFormula {
 	@Test
 	public void testModalCanDoTop() {
 		ModalFormula formula = aModalFormula().build();
-		assertTrue(formula.canDo(top));
-		assertFalse(top.canDo(formula));
+		assertTrue(formula.canDo(ConjunctionFormula.TOP));
+		assertFalse(ConjunctionFormula.TOP.canDo(formula));
 	}
 
 	@Test
 	public void testModalCanDoDTop() {
 		ModalFormula formula = aModalFormula().build();
-		assertTrue(formula.canDo(dTop));
-		assertFalse(dTop.canDo(formula));
+		assertTrue(formula.canDo(DisjunctionFormula.DTOP));
+		assertFalse(DisjunctionFormula.DTOP.canDo(formula));
 	}
 
 	@Test
@@ -58,7 +49,7 @@ public class TestModalFormula {
 
 		private Label label = new Label("a");
 		private double probability = 0.5;
-		private DisjunctionFormula dTop = new DisjunctionFormula(top);
+		private DisjunctionFormula formula = DisjunctionFormula.DTOP;
 
 		public ModalFormulaBuilder withProbability(double probability) {
 			this.probability = probability;
@@ -71,7 +62,7 @@ public class TestModalFormula {
 		}
 
 		public ModalFormula build() {
-			return new ModalFormula(label, probability, dTop);
+			return new ModalFormula(label, probability, formula);
 		}
 	}
 }

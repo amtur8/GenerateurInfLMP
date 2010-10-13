@@ -6,6 +6,8 @@ import java.util.Collection;
 public class DisjunctionFormula implements Formula {
 	
 	private Collection<ConjunctionFormula> formulas;
+	public static final DisjunctionFormula DTOP = new DisjunctionFormula(ConjunctionFormula.TOP);
+	public static final DisjunctionFormula BOTTOM = new DisjunctionFormula();
 
 	public DisjunctionFormula(ConjunctionFormula newCFormula) {
 		formulas = new ArrayList<ConjunctionFormula>();
