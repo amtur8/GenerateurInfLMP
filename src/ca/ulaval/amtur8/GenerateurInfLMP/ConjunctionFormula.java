@@ -60,4 +60,29 @@ public class ConjunctionFormula implements Formula {
 	public Collection<? extends ModalFormula> getFormulas() {
 		return formulas;
 	}
+	
+	public Formula and(ConjunctionFormula f2) {
+		this.formulas.addAll(f2.getFormulas());
+		return this;
+	}
+
+	@Override
+	public Formula and(Formula f2) {
+		return f2.and(this);
+	}
+
+	@Override
+	public Formula or(Formula f2) {
+		return f2.or(new DisjunctionFormula(this));
+	}
+
+	@Override
+	public boolean canDo(Formula formule) {
+		return formule.isDoneBy(this);
+	}
+
+	@Override
+	public boolean isDoneBy(Formula formule) {
+		return formule.canDo(this);
+	}	
 }

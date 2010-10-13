@@ -14,7 +14,6 @@ public class ModalFormula implements Formula {
 		this.formula = formula;
 	}
 
-	@Override
 	public boolean canDo(ModalFormula formule) {
 		return formule.isDoneBy(this.action, this.probability, this.formula);
 	}
@@ -30,13 +29,31 @@ public class ModalFormula implements Formula {
 		return formula2.canDo(this.formula);
 	}
 
-	@Override
 	public boolean canDo(ConjunctionFormula f) {
 		return f.isDoneBy(this);
 	}
 	
-	@Override
 	public boolean canDo(DisjunctionFormula f) {
 		return f.isDoneBy(this);
+	}
+
+	@Override
+	public Formula and(Formula f2) {
+		return f2.and(new ConjunctionFormula(this));
+	}
+
+	@Override
+	public Formula or(Formula f2) {
+		return f2.or(new DisjunctionFormula(new ConjunctionFormula(this)));
+	}
+
+	@Override
+	public boolean canDo(Formula formule) {
+		return formule.isDoneBy(this);
+	}
+
+	@Override
+	public boolean isDoneBy(Formula formule) {
+		return formule.canDo(this);
 	}	
 }

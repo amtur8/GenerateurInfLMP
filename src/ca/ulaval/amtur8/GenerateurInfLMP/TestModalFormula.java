@@ -35,6 +35,13 @@ public class TestModalFormula {
 		assertTrue(formula.canDo(DisjunctionFormula.DTOP));
 		assertFalse(DisjunctionFormula.DTOP.canDo(formula));
 	}
+	
+	@Test
+	public void testCanDoGeneric() {
+		ModalFormula formula = aModalFormula().build();
+		Formula genericFormula = aModalFormula().build();
+		assertTrue(formula.canDo(genericFormula));
+	}
 
 	@Test
 	public void testCompareProbabilityEqualsShouldBeZero() {
