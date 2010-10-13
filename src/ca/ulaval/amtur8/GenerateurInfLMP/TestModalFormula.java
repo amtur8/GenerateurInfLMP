@@ -7,20 +7,12 @@ import org.junit.Test;
 
 public class TestModalFormula {
 
-	private Label action, action2;
 	private ConjunctionFormula top;
 	private DisjunctionFormula dTop;
-	private ModalFormula modForm1, modForm2, modForm3;
-
 	@Before
 	public void setUp() throws Exception {
-		action = new Label("a");
-		action2 = new Label("b");
 		top = new ConjunctionFormula();
 		dTop = new DisjunctionFormula(top);
-		modForm1 = new ModalFormula(action, 0.5, dTop);
-		modForm2 = new ModalFormula(action, 0.6, dTop);
-		modForm3 = new ModalFormula(action2, 0.5, dTop);
 	}
 
 	@Test
@@ -34,24 +26,23 @@ public class TestModalFormula {
 
 	@Test
 	public void testCanNotDoModalFormulaDifferentAction() {
-		assertFalse(modForm1.canDo(modForm3));
-	}
-
-	@Test
-	public void testCanNotDoModalFormulaDifferentAction2() {
-		assertFalse(modForm3.canDo(modForm2));
+		ModalFormula formula = aModalFormula().withLabel("a").build();
+		ModalFormula formulaWithADifferentAction = aModalFormula().withLabel("b").build();
+		assertFalse(formula.canDo(formulaWithADifferentAction));
 	}
 
 	@Test
 	public void testModalCanDoTop() {
-		assertTrue(modForm1.canDo(top));
-		assertFalse(top.canDo(modForm2));
+		ModalFormula formula = aModalFormula().build();
+		assertTrue(formula.canDo(top));
+		assertFalse(top.canDo(formula));
 	}
 
 	@Test
 	public void testModalCanDoDTop() {
-		assertTrue(modForm1.canDo(dTop));
-		assertFalse(dTop.canDo(modForm2));
+		ModalFormula formula = aModalFormula().build();
+		assertTrue(formula.canDo(dTop));
+		assertFalse(dTop.canDo(formula));
 	}
 
 	@Test
@@ -71,6 +62,11 @@ public class TestModalFormula {
 
 		public ModalFormulaBuilder withProbability(double probability) {
 			this.probability = probability;
+			return this;
+		}
+		
+		public ModalFormulaBuilder withLabel(String label) {
+			this.label = new Label(label);
 			return this;
 		}
 
