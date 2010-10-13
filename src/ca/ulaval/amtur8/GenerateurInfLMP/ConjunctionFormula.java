@@ -2,9 +2,6 @@ package ca.ulaval.amtur8.GenerateurInfLMP;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
-
-
 
 public class ConjunctionFormula implements Formula {
 
@@ -20,10 +17,8 @@ public class ConjunctionFormula implements Formula {
 	}
 	
 	public boolean canDo(ModalFormula formula) {
-		Iterator<ModalFormula> iteratorOverPredicate;
-		iteratorOverPredicate = this.getIterator();
-		while (iteratorOverPredicate.hasNext()) {
-			if (iteratorOverPredicate.next().canDo(formula)) {
+		for (ModalFormula m : formulas) {
+			if (m.canDo(formula)) {
 				return true;
 			}
 		}
@@ -31,27 +26,25 @@ public class ConjunctionFormula implements Formula {
 	}
 	
 	public boolean canDo(ConjunctionFormula f) {
-		Iterator<ModalFormula> iteratorOverConclusion = f.getIterator();
-		while (iteratorOverConclusion.hasNext()) {
-			if (!this.canDo(iteratorOverConclusion.next())) {
+		return f.isDoneBy(this);
+	}
+	
+	private boolean isDoneBy(ConjunctionFormula conjunctionFormula) {
+		for (ModalFormula m : formulas) {
+			if (!conjunctionFormula.canDo(m)) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
+
 	public boolean canDo(DisjunctionFormula formula) {
 		return formula.isDoneBy(this);
 	}
 
-	private Iterator<ModalFormula> getIterator() {
-		return formulas.iterator();
-	}
-
 	public boolean isDoneBy(ModalFormula modalFormula) {
-		Iterator<ModalFormula> iteratorOverConclusion = this.getIterator();
-		while  (iteratorOverConclusion.hasNext()) {
-			if (!modalFormula.canDo(iteratorOverConclusion.next())) {
+		for (ModalFormula m : formulas) {
+			if (!modalFormula.canDo(m)) {
 				return false;
 			}
 		}
