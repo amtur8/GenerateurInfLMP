@@ -18,6 +18,10 @@ public class DisjunctionFormula implements Formula {
 		formulas = new ArrayList<ConjunctionFormula>();
 	}
 
+	public DisjunctionFormula(Collection<ConjunctionFormula> aInclure) {
+		formulas = aInclure;
+	}
+
 	public boolean canDo(ModalFormula modalFormula) {
 		for (ConjunctionFormula c : formulas) {
 			if (!c.canDo(modalFormula)) {
@@ -61,5 +65,9 @@ public class DisjunctionFormula implements Formula {
 			}
 		}
 		return false;
+	}
+
+	public Collection<? extends ConjunctionFormula> getFormulas() {
+		return formulas;
 	}
 }

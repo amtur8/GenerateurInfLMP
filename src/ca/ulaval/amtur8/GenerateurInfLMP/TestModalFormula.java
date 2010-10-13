@@ -45,7 +45,7 @@ public class TestModalFormula {
 		return new ModalFormulaBuilder();
 	}
 
-	private class ModalFormulaBuilder {
+	/*private class ModalFormulaBuilder {
 
 		private Label label = new Label("a");
 		private double probability = 0.5;
@@ -64,5 +64,5 @@ public class TestModalFormula {
 		public ModalFormula build() {
 			return new ModalFormula(label, probability, formula);
 		}
-	}
+	}*/
 }

@@ -8,14 +8,13 @@ import org.junit.Test;
 public class TestDisjuctionFormula {
 
 	private DisjunctionFormula bottom, dTop, dmodalF;
-	private ConjunctionFormula cTop, cModalF;
+	private ConjunctionFormula cModalF;
 	private ModalFormula modalF;
 	
 	@Before
 	public void setUp() throws Exception {
-		cTop = new ConjunctionFormula();
-		bottom = new DisjunctionFormula();
-		dTop = new DisjunctionFormula(cTop);
+		bottom = DisjunctionFormula.BOTTOM;
+		dTop = DisjunctionFormula.DTOP;
 		modalF = new ModalFormula(new Label("a"), 0.5, dTop);
 		cModalF = new ConjunctionFormula(modalF);
 		dmodalF = new DisjunctionFormula(cModalF);

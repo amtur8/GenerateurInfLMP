@@ -10,16 +10,20 @@ public class ConjunctionFormula implements Formula {
 	public static final ConjunctionFormula TOP = new ConjunctionFormula(); 
 	
 	public ConjunctionFormula(ModalFormula modalFormula) {
-		formulas = new ArrayList<ModalFormula>();
-		formulas.add(modalFormula);
+		this.formulas = new ArrayList<ModalFormula>();
+		this.formulas.add(modalFormula);
 	}
 
 	public ConjunctionFormula() {
-		formulas = new ArrayList<ModalFormula>();
+		this.formulas = new ArrayList<ModalFormula>();
 	}
 	
+	public ConjunctionFormula(Collection<ModalFormula> aInclure) {
+		this.formulas = aInclure;
+	}
+
 	public boolean canDo(ModalFormula formula) {
-		for (ModalFormula m : formulas) {
+		for (ModalFormula m : this.formulas) {
 			if (m.canDo(formula)) {
 				return true;
 			}
@@ -32,7 +36,7 @@ public class ConjunctionFormula implements Formula {
 	}
 	
 	private boolean isDoneBy(ConjunctionFormula conjunctionFormula) {
-		for (ModalFormula m : formulas) {
+		for (ModalFormula m : this.formulas) {
 			if (!conjunctionFormula.canDo(m)) {
 				return false;
 			}
@@ -45,11 +49,15 @@ public class ConjunctionFormula implements Formula {
 	}
 
 	public boolean isDoneBy(ModalFormula modalFormula) {
-		for (ModalFormula m : formulas) {
+		for (ModalFormula m : this.formulas) {
 			if (!modalFormula.canDo(m)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public Collection<? extends ModalFormula> getFormulas() {
+		return formulas;
 	}
 }
